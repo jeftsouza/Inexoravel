@@ -1,8 +1,7 @@
 # Projeto: INEXORÁVEL (Deadline Tracker)
 
 ## 1. Capa Escolhida
-* **Música / Álbum:** "Canto para Minha Morte" - Raul Seixas (*Há 10 Anos Atrás*, 1976)
-* **Link para Imagem:** https://upload.wikimedia.org/wikipedia/pt/8/87/Ha_10_Anos_Atras.jpg
+* **Música / Álbum:** "Canto para Minha Morte" - Raul Seixas (*Há 10 Mil Anos Atrás*, 1976)
 
 ## 2. Palavra-Conceito
 * **Conceito:** **INEVITABILIDADE**
@@ -14,4 +13,4 @@ A inevitabilidade do tempo gerou o **INEXORÁVEL**, uma SPA de gerenciamento de 
 
 ## 4. Uso de IA vs. Decisões Próprias
 * **O que foi pedido à IA:** Auxílio na escolha de termos de busca em inglês para o moodboard, estruturação inicial dos componentes Angular e sugestão de paleta de cores para o Tailwind CSS baseada em dark mode com tons de alerta.
-* **O que foi decidido sozinho:** A escolha da obra de origem (Raul Seixas), a palavra-conceito "Inevitabilidade", a criação da ferramenta de contagem regressiva de prazos e a lógica de classificação dos níveis de urgência.
+* **O que foi decidido sozinho:** A escolha da obra de origem (Raul Seixas), a palavra-conceito "Inevitabilidade", a criação da ferramenta de contagem regressiva de prazos e a lógica de classificação dos níveis de urgência. (arquivos TS)
