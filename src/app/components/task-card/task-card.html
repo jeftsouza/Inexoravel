@@ -1,0 +1,42 @@
+<div [class]="'p-5 rounded-lg border transition-all flex flex-col justify-between gap-4 relative overflow-hidden ' + getUrgenciaClass()"
+     [class.animate-blood]="isBleeding()">
+  <div>
+    <div class="flex items-center justify-between gap-2 mb-2">
+      <span class="text-xs uppercase tracking-widest px-2 py-0.5 rounded bg-zinc-800 text-zinc-400 font-mono">
+        {{ task().categoria }}
+      </span>
+      <span class="text-xs text-zinc-500 font-mono">
+        {{ task().dataLimite | date:'dd/MM/yyyy HH:mm' }}
+      </span>
+    </div>
+
+    <h3 [class.line-through]="task().concluida" class="font-semibold text-lg text-zinc-100">
+      {{ task().titulo }}
+    </h3>
+    <p class="text-sm text-zinc-400 mt-1 line-clamp-2">
+      {{ task().descricao }}
+    </p>
+  </div>
+
+  <div class="flex items-center justify-between pt-3 border-t border-zinc-800/80 text-xs">
+    <div class="flex items-center gap-2">
+      <button 
+        (click)="handleToggle()" 
+        class="px-2.5 py-1 rounded border border-zinc-700 hover:border-red-800 hover:bg-red-950/40 text-zinc-300 transition-all active:scale-95">
+        {{ task().concluida ? 'Marcar Pendente' : 'Marcar Concluído' }}
+      </button>
+
+      <a 
+        [routerLink]="['/tarefa', task().id]" 
+        class="px-2.5 py-1 text-red-400 hover:text-red-300 underline">
+        Detalhes &rarr;
+      </a>
+    </div>
+
+    <button 
+      (click)="onRemove()" 
+      class="text-zinc-600 hover:text-red-400 transition-colors">
+      Excluir
+    </button>
+  </div>
+</div>

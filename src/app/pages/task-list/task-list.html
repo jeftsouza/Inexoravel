@@ -1,0 +1,70 @@
+<section class="space-y-6">
+  <!-- Painel Resumo com os Signals e Computed -->
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <div class="bg-zinc-900 border border-zinc-800 p-4 rounded-lg">
+      <p class="text-xs text-zinc-500 uppercase font-mono">Total de Registros</p>
+      <p class="text-2xl font-bold text-zinc-100 mt-1">{{ taskService.totalTasks() }}</p>
+    </div>
+    <div class="bg-zinc-900 border border-zinc-800 p-4 rounded-lg">
+      <p class="text-xs text-zinc-500 uppercase font-mono">Prazos Pendentes</p>
+      <p class="text-2xl font-bold text-amber-500 mt-1">{{ taskService.pendingTasksCount() }}</p>
+    </div>
+    <div class="bg-zinc-900 border border-zinc-800 p-4 rounded-lg">
+      <p class="text-xs text-zinc-500 uppercase font-mono">Urgência Crítica (&lt;24h)</p>
+      <p class="text-2xl font-bold text-red-500 mt-1">{{ taskService.urgentTasksCount() }}</p>
+    </div>
+  </div>
+
+  <div class="flex items-center justify-between pt-4 border-t border-zinc-800">
+    <h1 class="text-xl font-bold text-zinc-100 uppercase tracking-wide">Prazos em Mapeamento</h1>
+    <a routerLink="/tarefa/nova" class="bg-red-600 hover:bg-red-700 text-white text-sm font-medium px-4 py-2 rounded transition-colors">
+      + Cadastrar Novo Prazo
+    </a>
+  </div>
+
+  <!-- Estrutura principal: Imagem na Esquerda + Cards na Direita -->
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+    
+    <!-- Coluna da Esquerda (Puro Osso) -->
+    <div 
+      title="&quot;Eu sou inevitável.&quot; — Thanos"
+      class="hidden lg:flex lg:col-span-3 flex-col items-center justify-start sticky top-20 p-4 bg-zinc-900/40 border border-zinc-800/80 rounded-lg">
+      <img 
+        src="morte.png" 
+        alt="Morte" 
+        class="w-full max-w-[180px] h-auto object-contain drop-shadow-[0_0_12px_rgba(239,68,68,0.4)]" />
+      <span class="text-[10px] text-zinc-500 font-mono mt-3 uppercase tracking-widest text-center">
+        O tempo é implacável
+      </span>
+    </div>
+
+    <!-- Coluna da Direita (Sua Grade de Tarefas Existente) -->
+    <div class="lg:col-span-9">
+      @if (taskService.loadingSignal()) {
+        <div class="p-8 text-center text-zinc-500">
+          <p class="animate-pulse">A carregar prazos do servidor...</p>
+        </div>
+      } @else if (taskService.errorSignal()) {
+        <div class="p-4 bg-red-950/40 border border-red-800 text-red-300 rounded text-sm">
+          {{ taskService.errorSignal() }}
+        </div>
+      } @else {
+        <!-- Grade de Cards em 2 colunas dentro da área direita -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          @for (item of taskService.tasks(); track item.id) {
+            <app-task-card 
+              [task]="item" 
+              (toggleStatus)="onToggleStatus($event)" 
+              (removeTask)="onRemoveTask($event)">
+            </app-task-card>
+          } @empty {
+            <div class="col-span-full text-center py-12 border border-dashed border-zinc-800 rounded-lg">
+              <p class="text-zinc-500">Nenhum prazo registado até ao momento.</p>
+            </div>
+          }
+        </div>
+      }
+    </div>
+
+  </div>
+</section>

@@ -1,0 +1,42 @@
+@if (task(); as item) {
+    <div class="max-w-2xl mx-auto bg-zinc-900 border border-zinc-800 rounded-lg p-6 space-y-6">
+      <div class="flex items-center justify-between border-b border-zinc-800 pb-4">
+        <span class="text-xs uppercase font-mono px-2 py-1 bg-zinc-800 text-zinc-400 rounded">
+          {{ item.categoria }}
+        </span>
+        <span class="text-xs text-zinc-500 font-mono">ID: #{{ item.id }}</span>
+      </div>
+  
+      <div>
+        <h1 class="text-2xl font-bold text-zinc-100">{{ item.titulo }}</h1>
+        <p class="text-zinc-400 mt-2 leading-relaxed">{{ item.descricao }}</p>
+      </div>
+  
+      <div class="bg-zinc-950 p-4 rounded border border-zinc-800 space-y-2 text-sm">
+        <div class="flex justify-between">
+          <span class="text-zinc-500">Data Limite:</span>
+          <span class="text-zinc-200 font-mono">{{ item.dataLimite | date:'dd/MM/yyyy HH:mm' }}</span>
+        </div>
+        <div class="flex justify-between">
+          <span class="text-zinc-500">Estado:</span>
+          <span [class]="item.concluida ? 'text-green-400' : 'text-amber-400'">
+            {{ item.concluida ? 'Concluído' : 'Em Contagem Regressiva' }}
+          </span>
+        </div>
+      </div>
+  
+      <div class="flex items-center justify-between pt-4 border-t border-zinc-800">
+        <a routerLink="/tarefas" class="text-sm text-zinc-400 hover:text-white">&larr; Voltar à Lista</a>
+        <button 
+          (click)="toggleStatus()" 
+          class="bg-zinc-800 hover:bg-zinc-700 text-zinc-200 px-4 py-2 rounded text-sm transition-colors">
+          {{ item.concluida ? 'Reabrir Prazo' : 'Marcar como Concluído' }}
+        </button>
+      </div>
+    </div>
+  } @else {
+    <div class="text-center py-12">
+      <p class="text-zinc-500">Prazo não localizado no sistema.</p>
+      <a routerLink="/tarefas" class="text-red-500 underline mt-2 inline-block text-sm">Voltar para a lista</a>
+    </div>
+  }
